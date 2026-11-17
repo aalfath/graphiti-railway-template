@@ -59,8 +59,9 @@ curl -X POST https://GRAPHITI-DOMAIN/search \
 
 Optional, add them yourself:
 
-- `MODEL_NAME` (both services): the OpenAI chat model used for extraction (upstream default otherwise). `EMBEDDER_MODEL` (MCP) / `EMBEDDING_MODEL_NAME` (API): the embedding model; both default to `text-embedding-3-small` with 1536 dimensions (`EMBEDDING_DIM`). Don't change the embedding size once the graph has data.
-- `OPENAI_BASE_URL` (API) / `OPENAI_API_URL` (MCP): an OpenAI-compatible endpoint instead of OpenAI.
+- `MODEL_NAME` (both services): the OpenAI chat model used for extraction (upstream default otherwise).
+- Embeddings use `text-embedding-3-small` at 1536 dimensions (`EMBEDDING_DIM`) on both services, so they share one graph. The MCP service can switch models with `EMBEDDER_MODEL`. Don't change the embedding size once the graph has data.
+- `OPENAI_API_URL` (MCP): an OpenAI-compatible endpoint for both chat and embeddings. On the REST API, upstream's `OPENAI_BASE_URL` changes only the chat endpoint; embeddings still go to OpenAI.
 - `GRAPHITI_GROUP_ID` (MCP): the default group (namespace), `main`.
 - `GRAPHITI_TELEMETRY_ENABLED=true`: opt in to Graphiti's anonymous telemetry (off by default here).
 - Neo4j memory: `NEO4J_server_memory_heap_max__size` (default `1G`) and `NEO4J_server_memory_pagecache_size` (default `512m`).
